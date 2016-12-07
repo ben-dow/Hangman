@@ -10,8 +10,8 @@ class Hangman:
         for i in range(0,len(self.word)):
             self.word_display.append(" ")
 
-        self.geuss_display = []
-        self.geusses_wrong = 0
+        self.guess_display = []
+        self.guesses_wrong = 0
 
     def indexWord(self, word):
         wordindex = dict()
@@ -21,12 +21,12 @@ class Hangman:
             else:
                 wordindex[word[i].upper()] = [i]
         return wordindex
-    def processGeuss(self, letter):
+    def processGuess(self, letter):
         if letter.strip().upper() in self.word or letter.lower() in self.word:
             return True
         else:
-            self.geusses_wrong += 1
-            self.geuss_display.append(letter)
+            self.guesses_wrong += 1
+            self.guess_display.append(letter)
             return False
 
     def build_word(self,letter):

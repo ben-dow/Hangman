@@ -103,6 +103,9 @@ class App:
 
 
     def resetgame(self):
+        '''
+        Resets the Game. Selects a New Word
+        '''
         self.clear_display(self.used)
         self.clear_display(self.word)
         self.clear_display(self.geuss)
