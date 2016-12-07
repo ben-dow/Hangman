@@ -66,18 +66,18 @@ class App:
         self.used.grid(row=1,column=3)
 
         '''
-        Geuss
+        Guess
         '''
 
-        self.geuss = Text(frame,height = 1, width=2)
-        self.geuss.grid(row=2,column=1)
+        self.guess = Text(frame,height = 1, width=2)
+        self.guess.grid(row=2,column=1)
 
-        self.geussbtn = Button(
+        self.guessbtn = Button(
                         frame,
                         text="Guess Letter",
-                        command = lambda: self.geuss_process(self.geuss.get(1.0))
+                        command = lambda: self.guess_process(self.guess.get(1.0))
                         )
-        self.geussbtn.grid(row=2,column=3)
+        self.guessbtn.grid(row=2,column=3)
 
 
         '''
@@ -108,8 +108,8 @@ class App:
         '''
         self.clear_display(self.used)
         self.clear_display(self.word)
-        self.clear_display(self.geuss)
-        self.geuss.config(state=NORMAL)
+        self.clear_display(self.guess)
+        self.guess.config(state=NORMAL)
         self.hangman = Hangman(self.filestorage.determineWord())
         self.word.config(width=len(self.hangman.word))
         self.wordlen.config(text='(' + str(len(self.hangman.word)) + ')')
@@ -121,16 +121,16 @@ class App:
         self.hangman_canvas.itemconfig(self.leg_r,state=HIDDEN)
         print(self.hangman.word)
         print(self.hangman.wordindex)
-    def geuss_process(self,geuss):
-            if geuss in self.hangman.geuss_display:
-                self.clear_display(self.geuss)
-                self.geuss.config(state=NORMAL)
+    def guess_process(self,guess):
+            if guess in self.hangman.guess_display:
+                self.clear_display(self.guess)
+                self.guess.config(state=NORMAL)
                 return
-            self.clear_display(self.geuss)
-            self.geuss.config(state=NORMAL)
-            exist = self.hangman.processGeuss(geuss)
+            self.clear_display(self.guess)
+            self.guess.config(state=NORMAL)
+            exist = self.hangman.processGuess(guess)
             if exist == True:
-                self.hangman.build_word(geuss)
+                self.hangman.build_word(guess)
                 self.clear_display(self.word)
                 self.word.config(state=NORMAL)
                 self.word.insert(END,''.join(self.hangman.word_display))
@@ -138,22 +138,22 @@ class App:
 
             else:
                 self.used.config(state=NORMAL)
-                self.used.insert(END,geuss)
+                self.used.insert(END,guess)
                 self.used.config(state=DISABLED)
-                if self.hangman.geusses_wrong == 1:
+                if self.hangman.guesses_wrong == 1:
                     self.hangman_canvas.itemconfig(self.head,state=NORMAL)
-                elif self.hangman.geusses_wrong == 2:
+                elif self.hangman.guesses_wrong == 2:
                     self.hangman_canvas.itemconfig(self.body,state=NORMAL)
-                elif self.hangman.geusses_wrong == 3:
+                elif self.hangman.guesses_wrong == 3:
                     self.hangman_canvas.itemconfig(self.arm_l,state=NORMAL)
-                elif self.hangman.geusses_wrong == 4:
+                elif self.hangman.guesses_wrong == 4:
                     self.hangman_canvas.itemconfig(self.arm_r,state=NORMAL)
-                elif self.hangman.geusses_wrong == 5:
+                elif self.hangman.guesses_wrong == 5:
                     self.hangman_canvas.itemconfig(self.leg_l,state=NORMAL)
-                elif self.hangman.geusses_wrong == 6:
+                elif self.hangman.guesses_wrong == 6:
                     self.hangman_canvas.itemconfig(self.leg_r,state=NORMAL)
                 else:
-                    self.clear_display(self.geuss)
+                    self.clear_display(self.guess)
                     self.clear_display(self.used)
                     self.used.config(state=NORMAL)
                     self.used.insert(END,'You Ran Out of Guesses')
