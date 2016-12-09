@@ -170,7 +170,7 @@ class App:
                 self.used.config(state=NORMAL)
                 self.used.insert(END,'You Win!')
                 self.used.config(state=DISABLED)
-                self.geuss.config(state=DISABLED)
+                self.guess.config(state=DISABLED)
                 self.wins += 1
                 self.wins_display.config(text='Wins: ' + str(self.wins))
     def clear_display(self,display):
